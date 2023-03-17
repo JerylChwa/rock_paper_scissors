@@ -1,9 +1,9 @@
 
 
 
-
+//function selects a random choice for the computer
 function getComputerChoice() {
-    let choices = Array("rock", "paper", "scissors")
+    let choices = Array("ROCK", "PAPER", "SCISSORS")
 
     // get random index value
     const randomIndex = Math.floor(Math.random() * choices.length);
@@ -16,7 +16,7 @@ function getComputerChoice() {
 }
 
 
-
+//function takes in players choice and computer's choice, compares the choices and announces the winner
 function playRound(playerSelection, computerSelection) {
     let outcome
 
@@ -25,8 +25,8 @@ function playRound(playerSelection, computerSelection) {
     }
     //player chooses rock, computer chooses paper
     //player chooses rock, computer chooses scissors 
-    else if (playerSelection = "rock") {
-        if (computerSelection == "paper") {
+    else if (playerSelection == "ROCK") {
+        if (computerSelection == "PAPER") {
             outcome = "You lose! Paper beats rock"
         }
         else {
@@ -35,8 +35,8 @@ function playRound(playerSelection, computerSelection) {
     }
     //player chooses paper, computer chooses scissors
     //player chooses paper, computer chooses rock
-    else if (playerSelection = "paper") {
-        if (computerSelection == "scissors") {
+    else if (playerSelection == "PAPER") {
+        if (computerSelection == "SCISSORS") {
             outcome = "You lose! Scissors beats paper"
         }
         else {
@@ -46,8 +46,8 @@ function playRound(playerSelection, computerSelection) {
     }
     //player chooses scissors, computer chooses rock
     //player chooses scissors, computer chooses paper
-    else if (playerSelection = "scissors") {
-        if (computerSelection == "rock") {
+    else if (playerSelection == "SCISSORS") {
+        if (computerSelection == "ROCK") {
             outcome = "You lose! Rock beats scissors"
         }
         else {
@@ -60,10 +60,12 @@ function playRound(playerSelection, computerSelection) {
     return outcome
 }
 
+//assigns computer's choice to a variable
 let computer = getComputerChoice()
+//to view what the computer's choice is
 console.log(computer)
-let playerChoice = prompt("What's your choice? Type in small casing")
+//assigns player's choice to a variable
+let playerChoice = prompt("What's your choice?")
+//announces the winner in the console by passing in the player's and computer's choice into function playround
+console.log(playRound(playerChoice.toUpperCase(), computer))
 
-
-
-console.log(playRound(playerChoice, computer))

@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #4a4e69;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    font-style: italic;
+    
+}
+
+#result {
+    height: 500px;
+    font-size: 70px;
+    text-align: center;
+    padding-top:300px ;
+    color: white;
+}
+
+#score {
+    text-align: center;
+    font-size: 70px;
+    color: white;
+    height: 200px;
+    padding-bottom: 150px; ;
+}
+
+#choices {
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    height: 300px;
+    width: 400px;
+    font-size: 60px;
+    background-color: #c9ada7;
+    transition: 0.5s;
+    
+}
+
+button:hover {
+    background-color: #ee6c4d;
+    color: white;
+    
+    box-shadow: 0px 0px 30px white;
+}

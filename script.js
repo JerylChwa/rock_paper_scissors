@@ -1,7 +1,126 @@
+const rock = document.querySelector('#rock')
+const paper = document.querySelector('#paper')
+const scissors = document.querySelector('#scissors')
+const winner = document.querySelector('#result')
+const score = document.querySelector('#score')
+
+let com_score = 0;
+let player_score=0;
+let player_choice
+let outcome
+
+winner.textContent = "Select your choice!"
+score.setAttribute('style', 'white-space: pre;');
+score.textContent = "Com vs Player \r\n"  
+score.textContent +=com_score + ":"+ player_score
+
+
+rock.addEventListener('click', function(){
+    player_choice = "ROCK"
+    //winner.textContent = player_choice
+    game("ROCK")
+});
+paper.addEventListener('click', function(){
+    player_choice = "PAPER"
+    //winner.textContent = player_choice
+    game("PAPER")
+});
+scissors.addEventListener('click', function(){
+    player_choice = "SCISSORS"
+    //winner.textContent = player_choice
+    game("SCISSORS")
+});
 
 
 
-//function selects a random choice for the computer
+
+function game(select) {
+    console.log(select)
+    let computerSelection = getComputerChoice()
+    console.log(`Computer chose ${computerSelection}`)
+
+
+    if (select == computerSelection) {
+        outcome = "It's a draw!"
+    }
+    //player chooses rock, computer chooses paper
+    //player chooses rock, computer chooses scissors 
+    else if (select == "ROCK") {
+        if (computerSelection == "PAPER") {
+            outcome = "You lose! Paper beats rock"
+            com_score++
+
+        }
+        else {
+            outcome = "You win! Rock beats scissors"
+            player_score++
+
+        }
+    }
+    //player chooses paper, computer chooses scissors
+    //player chooses paper, computer chooses rock
+    else if (select == "PAPER") {
+        if (computerSelection == "SCISSORS") {
+            outcome = "You lose! Scissors beats paper"
+            com_score++
+
+        }
+        else {
+            outcome = "You win! Paper beats rock"
+            player_score++
+
+        }
+
+    }
+    //player chooses scissors, computer chooses rock
+    //player chooses scissors, computer chooses paper
+    else if (select == "SCISSORS") {
+        if (computerSelection == "ROCK") {
+            outcome = "You lose! Rock beats scissors"
+            com_score++
+
+        }
+        else {
+            outcome = "You win! Scissors beats paper"
+            player_score++
+
+        }
+    }
+    console.log(outcome)
+    
+    if (com_score <5 && player_score<5){
+        winner.textContent = outcome 
+        score.textContent = "Com vs Player \r\n"  
+        score.textContent +=com_score + ":"+ player_score
+    }else if (com_score ==5){
+        winner.textContent = "Computer Won!" + "with a score of  "+ com_score +" vs "+ player_score +  ", Click to play again!"
+        score.textContent = "Com vs Player \r\n"  
+        score.textContent +=com_score + ":"+ player_score
+        com_score = 0;
+        player_score = 0;
+        //var z = document.createElement('p'); //is a node
+        //z.textContent = "Computer Won"; //stores text in node
+        //winner.appendChild(z) //appends z which is a p node to winner as the parent node
+
+    }else if (player_score==5){
+        winner.textContent = "You Won!" + "with a score of  "+ com_score +" vs "+ player_score + ", Click to play again!"
+        score.textContent = "Com vs Player \r\n"  
+        score.textContent +=com_score + ":"+ player_score
+        com_score = 0;
+        player_score = 0;
+        //var z = document.createElement('p'); //is a node
+        //z.textContent = "Computer Won"; //stores text in node
+        //winner.appendChild(z) //appends z which is a p node to winner as the parent node
+    }
+    
+}
+
+
+
+
+
+
+//function that selects a random choice for the computer
 function getComputerChoice() {
     let choices = Array("ROCK", "PAPER", "SCISSORS")
 
@@ -12,98 +131,4 @@ function getComputerChoice() {
     const item = choices[randomIndex];
 
     return item
-
 }
-
-
-//function takes in players choice and computer's choice, compares the choices and announces the winner
-function playRound() {
-    let outcome
-    //assigns computer's choice to a variable
-    let computerSelection = getComputerChoice()
-    //to view what the computer's choice is
-    console.log(computerSelection)
-    //assigns player's choice to a variable
-    let playerSelection = (prompt("What's your choice?")).toUpperCase();
-
-    if (playerSelection == computerSelection) {
-        outcome = "It's a draw!"
-    }
-    //player chooses rock, computer chooses paper
-    //player chooses rock, computer chooses scissors 
-    else if (playerSelection == "ROCK") {
-        if (computerSelection == "PAPER") {
-            outcome = "You lose! Paper beats rock"
-
-        }
-        else {
-            outcome = "You win! Rock beats scissors"
-
-        }
-    }
-    //player chooses paper, computer chooses scissors
-    //player chooses paper, computer chooses rock
-    else if (playerSelection == "PAPER") {
-        if (computerSelection == "SCISSORS") {
-            outcome = "You lose! Scissors beats paper"
-
-        }
-        else {
-            outcome = "You win! Paper beats rock"
-
-        }
-
-    }
-    //player chooses scissors, computer chooses rock
-    //player chooses scissors, computer chooses paper
-    else if (playerSelection == "SCISSORS") {
-        if (computerSelection == "ROCK") {
-            outcome = "You lose! Rock beats scissors"
-
-        }
-        else {
-            outcome = "You win! Scissors beats paper"
-
-        }
-
-    }
-
-
-    return outcome
-}
-
-
-
-
-
-
-
-function game() {
-    //Initialises the score variables to keep score
-    let com_score = 0;
-    let player_score = 0;
-    //Makes the game go for 5 rounds
-    for (let i = 0; i < 5; i++) {
-        //stores the outcome of the game into the result variable
-        result = playRound()
-        //announces the winner of the round 
-        console.log(result)
-        //add 1 to the winner of the round, we identify the winner of the round by lookig at the outcome string of the game
-        if (result.includes("You win!")) {
-            player_score++
-        } else if (result.includes("You lose!")) {
-            com_score++
-        }
-    } //announces the winner at the end of the 5 rounds
-    if (com_score > player_score) {
-        console.log(`You lost with a score of ${player_score} against the computer which scored ${com_score}`)
-    } else if (player_score > com_score) {
-        console.log(`You won with a score of ${player_score} against the computer which scored ${com_score}`)
-    } else {
-        console.log(`It's a draw! You both scored ${player_score}`)
-    }
-
-}
-
-
-console.log(game())
